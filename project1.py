@@ -37,7 +37,8 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     given data point and parameters.
     """
     # Your code here
-    raise NotImplementedError
+    Z = label * (theta @ feature_vector.T + theta_0)
+    return 0 if Z >= 1 else 1- Z
 #pragma: coderesponse end
 
 
@@ -61,7 +62,14 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     loss across all of the points in the feature matrix.
     """
     # Your code here
-    raise NotImplementedError
+    Z = labels * (theta @ feature_matrix.T + theta_0)
+    
+    loss = np.array([ 0 if z >= 1 else 1- z for z in Z])
+    
+    return np.mean(loss) 
+
+    # return np.mean(loss)
+    
 #pragma: coderesponse end
 
 
