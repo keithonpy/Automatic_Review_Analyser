@@ -96,7 +96,7 @@ def perceptron_single_step_update(
     completed.
     """
     # Your code here
-    raise NotImplementedError
+    
 #pragma: coderesponse end
 
 
