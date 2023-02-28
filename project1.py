@@ -68,7 +68,6 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     
     return np.mean(loss) 
 
-    # return np.mean(loss)
     
 #pragma: coderesponse end
 
