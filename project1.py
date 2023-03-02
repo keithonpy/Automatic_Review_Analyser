@@ -173,7 +173,15 @@ def average_perceptron(feature_matrix, labels, T):
     find a sum and divide.
     """
     # Your code here
-    raise NotImplementedError
+    current_theta, current_theta_0 =np.zeros(feature_matrix.shape[1]), 0
+    total_theta, total_theta_0 =np.zeros(feature_matrix.shape[1]), 0
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            current_theta, current_theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], current_theta, current_theta_0)
+            total_theta += current_theta
+            total_theta_0 += current_theta_0
+
+    return (total_theta/(feature_matrix.shape[0]*T), total_theta_0 /(feature_matrix.shape[0]*T))
 #pragma: coderesponse end
 
 
