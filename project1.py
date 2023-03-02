@@ -96,7 +96,11 @@ def perceptron_single_step_update(
     completed.
     """
     # Your code here
-    
+    if label*(current_theta@feature_vector.T+current_theta_0) <= 0:
+        current_theta += label*feature_vector
+        current_theta_0 += label
+
+    return (current_theta, current_theta_0)
 #pragma: coderesponse end
 
 
@@ -127,11 +131,14 @@ def perceptron(feature_matrix, labels, T):
     the feature matrix.
     """
     # Your code here
+    current_theta, current_theta_0 =np.zeros(feature_matrix.shape[1]), 0
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
             # Your code here
-            pass
-    raise NotImplementedError
+            current_theta, current_theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], current_theta, current_theta_0)
+
+    return (current_theta, current_theta_0)
+     
 #pragma: coderesponse end
 
 
