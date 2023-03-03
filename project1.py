@@ -290,7 +290,8 @@ def classify(feature_matrix, theta, theta_0):
     be considered a positive classification.
     """
     # Your code here
-    raise NotImplementedError
+    Z = theta @ feature_matrix.T + theta_0
+    return np.where(Z > 0, 1, -1)
 #pragma: coderesponse end
 
 
@@ -328,7 +329,10 @@ def classifier_accuracy(
     accuracy of the trained classifier on the validation data.
     """
     # Your code here
-    raise NotImplementedError
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_accuracy = accuracy(classify(train_feature_matrix, theta, theta_0), train_labels)
+    val_accuracy = accuracy(classify(val_feature_matrix, theta, theta_0), val_labels)
+    return (train_accuracy, val_accuracy)
 #pragma: coderesponse end
 
 
