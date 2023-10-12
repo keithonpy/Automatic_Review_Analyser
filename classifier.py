@@ -361,11 +361,27 @@ def bag_of_words(texts):
     """
     # Your code here
     dictionary = {} # maps word to unique index
+
+    # add the stopwords list
+    
+    stopwords = set()
+    with open('stopwords.txt') as f:
+
+        for w in f:
+            stopwords.add(w.strip('\n'))
+
+
     for text in texts:
         word_list = extract_words(text)
         for word in word_list:
-            if word not in dictionary:
+            if word not in dictionary and word not in stopwords:
                 dictionary[word] = len(dictionary)
+
+
+    
+
+
+
     return dictionary
 #pragma: coderesponse end
 
@@ -390,7 +406,8 @@ def extract_bow_feature_vectors(reviews, dictionary):
         word_list = extract_words(text)
         for word in word_list:
             if word in dictionary:
-                feature_matrix[i, dictionary[word]] = 1
+                feature_matrix[i, dictionary[word]] = 1 # binary indicator
+                # feature_matrix[i, dictionary[word]] += 1 # count features
     return feature_matrix
 #pragma: coderesponse end
 
